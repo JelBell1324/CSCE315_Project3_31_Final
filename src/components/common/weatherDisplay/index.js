@@ -10,7 +10,7 @@ const WeatherDisplay = () => {
 	useEffect(() => {
 		const getWeather = async () => {
 			const res = await fetch(
-				"http://api.weatherapi.com/v1/current.json?key=44dd80c5f1dd47f8ba104537230205&q=77840&aqi=no"
+				"https://api.weatherapi.com/v1/current.json?key=44dd80c5f1dd47f8ba104537230205&q=77840&aqi=no"
 			).then(result => result.json());
 			setWeather(res.current);
 		}
