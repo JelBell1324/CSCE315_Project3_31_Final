@@ -1,0 +1,35 @@
+Meeting Minutes:
+
+Date: 4/24/2023
+Time: 6:00 PM 
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Continue implementing User Authentication with Google's Oauth
+Finishing login page for managers and servers & add functionalities
+
+Status Update Since Last Meeting:
+
+Added username and password to database for user authentication
+Researched and begun experimenting with Google's Oauth API for React
+
+Tasks Completed:
+
+N/A Pushing back Google Oauth and user authentication to next scrum
+
+Task Assignments:
+
+Finish User authentication with Google's Oauth: Assigned to Andrew/Jeffrey, In progress
+Finish log in landing page for user authentication: Assigned to Art/David, In progress
+Start looking into google translate API: Assigned to all, In progress
+Implement Server GUI translate functionality on panels Assigned to Andrew/Jeffrey, Not started
+Implement a info/help button for reports on Manager View: Assigned to Art/David, Not started
+
+End of Meeting

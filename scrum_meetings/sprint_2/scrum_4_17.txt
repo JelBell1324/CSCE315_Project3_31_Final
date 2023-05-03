@@ -1,0 +1,42 @@
+Meeting Minutes:
+
+Date: 4/17/2023
+Time: 2:30 PM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Discuss manager GUI state as well as the the Menu display GUI
+Linking and connecting completed backend queries and functionalities post-phase 4 from project 2
+Inclusion of User Authentication
+
+Status Update Since Last Meeting:
+
+Completed the queries from project 2 phase 4 on the backend side
+Completed manager components and menu display components - to be Implemented
+
+Tasks Completed:
+
+Finish queries phase 4: Assigned to Andrew/Jeffrey; Completed
+    - getSalesReport
+    - getXReport/getZReport
+    - getRestockReport
+    - addInventoryItem
+Wrote out individual components that make up manager : Assigned to Art; Completed
+    - Data visualization pop-up
+    - Menu/inventory item display component
+    - Reports button panel component
+
+Task Assignments:
+
+Link queries post-phase 4 to the front end (Sales report, X & Z reports etc. ) : Assigned to Andrew/Jeffrey; In progress
+Implement manager GUI: Assigned to Art/David; In progress
+Implement log in landing page for user authentication: Assigned Art/David; In progress
+
+End of Meeting

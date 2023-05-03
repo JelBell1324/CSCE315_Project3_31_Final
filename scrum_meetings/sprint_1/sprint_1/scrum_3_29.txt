@@ -1,0 +1,39 @@
+Meeting Minutes:
+
+Date: March 29, 2023
+Time: 9:00 AM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Frontend framework
+Backend framework
+Other technologies and division of roles
+
+Status Update Since Last Meeting:
+
+Selected project framework.
+Established overarching goals and concerns of the project.
+Tasks Completed:
+
+Assess framework capabilities: Assigned to Art/Andrew; Completed? Yes
+Plan out database transfer to new framework: Assigned to David/Jeffrey; Completed? Yes
+Before The Next Meeting:
+Plans:
+
+Establish a workable foundation for UI
+Successfully connect new node.js framework with database
+Task Assignments:
+
+Design UI for Customer/Server/Manager: Assigned to Art/Andrew
+Establish working connection to database: Assigned to David/Jeffrey
+Download and install all needed technologies and dependencies: Assigned to Everyone
+Set up version control for front-end: Assigned to David
+Set up version control for back-end: Assigned to Jeffrey
+End of Meeting

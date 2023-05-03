@@ -1,0 +1,35 @@
+Meeting Minutes:
+
+Date: 4/12/2023
+Time: 2:30 PM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Finish manager GUI, add "user authentication"
+Finishing backend queries and functionalities post-phase 4 from project 2
+
+Status Update Since Last Meeting:
+
+Completed and transfered over the queries pre-phase 4 from project 2
+Finished and designed manager GUI and took feedback from test users
+
+Tasks Completed:
+
+Finish queries pre-phase 3: Assigned to Andrew/Jeffrey; Completed
+Design manager GUI after user feedback: Assigned to Art; Completed
+Implement manager GUI: Assigned to Art/David; In progress
+
+Task Assignments:
+
+Finish queries post-phase 4 (Sales report, X & Z reports etc. ): Assigned to Andrew/Jeffrey; In progress
+Implement manager GUI: Assigned to Art/David; In progress
+Implement log in landing page for user authentication: Assigned Art/David;
+
+End of Meeting

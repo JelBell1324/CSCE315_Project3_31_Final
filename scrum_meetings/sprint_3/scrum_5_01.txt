@@ -1,0 +1,41 @@
+Meeting Minutes:
+
+Date: 5/01/2023
+Time: 3:00 PM 
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Consider adding quality of life changes to the manager and customer/server ends
+Add visuals to our existing reports
+
+Status Update Since Last Meeting:
+
+Fully functioning translate functionalities
+Extra support added to more languages
+Fully modifiable menu and inventory
+
+Tasks Completed:
+
+Implement GUI translate functionalities
+Add more language support
+Implement create menu items functionalities
+Implement edit menu items functionalities
+Implement edit inventory item functionalities
+
+Task Assignments:
+
+Implement delete menu item functionalities, Assigned to: Art/David
+Implement quantity edit ability on order total page, Assigned to: Art/Jeffrey
+Create visuals for restock report, Assigned to: Andrew
+Create visuals for excess report, Assigned to: Andrew
+Create visuals for sales report, Assigned to: Andrew
+
+
+End of Meeting

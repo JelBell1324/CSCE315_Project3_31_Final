@@ -1,0 +1,42 @@
+Meeting Minutes:
+
+Date: 4/29/2023
+Time: 10:00 PM 
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Finish up the implementation of the translate GUI and wider language support
+Implement the inventory and menu modularity in the manager view
+
+Status Update Since Last Meeting:
+
+Completed implementing User Authentication
+    - GoogleOauth with authentication router on the backend
+    - Login modal on the front end
+Completed front end accessability features
+    - Info help buttons
+
+Tasks Completed:
+
+Implement addInventory/MenuItem query and revenue editing queries
+Implement login page (Google Oauth)
+Implement login popup GUI
+Implement info/help buttons
+
+Task Assignments:
+
+Implement GUI translate functionalities, Assigned to: David/Andrew
+Add more language support, Assigned to: Jeffrey
+Implement create menu items functionalities, Assigned to: Art/Jeffrey
+Implement edit menu items functionalities, Assigned to: Art/David
+Implement edit inventory item functionalities, Assigned to: Art
+
+
+End of Meeting

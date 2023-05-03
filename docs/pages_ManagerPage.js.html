@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pages/ManagerPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pages/ManagerPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useEffect, useState } from "react";
+import { Flex, Box, Text, Button } from "@chakra-ui/react";
+import BaseLayout from "../components/mainView";
+import Database, { getUID } from "../data";
+import { useNavigate } from "react-router-dom";
+import OrderHistoryDisplay from "../components/common/orderHistoryDisplay";
+import MenuCategorySelectionDisplay from "../components/common/menuCategorySelectionDisplay";
+import ItemSelectionDisplay from "../components/manager/itemSelectionDisplay";
+import RestockReportDisplay from "../components/manager/reports/restockReportDisplay";
+import SalesReportDisplay from "../components/manager/reports/salesReportDisplay";
+import ExcessReportDisplay from "../components/manager/reports/excessReportDisplay";
+import XReportDisplay from "../components/manager/reports/xreportDisplay";
+import ZReportDisplay from "../components/manager/reports/zreportDisplay";
+import CreateMenuItemForm from "../components/manager/createMenuItemForm";
+import nameToUrl from "../imageMapping";
+import AddStaffForm from "../components/manager/createStaffForm";
+import StaffTable from "../components/manager/staffTable";
+import WeatherDisplay from "../components/common/weatherDisplay";
+
+/**
+ * Returns main page component for the Manager View
+ */
+const ManagerPage = () => {
+	const [lookingAtMenu, setLookingAtMenu] = useState(true);
+	const [category, setCategory] = useState("Sandwiches");
+	const [order, setOrder] = useState([]);
+	const [menuItems, setMenuItems] = useState([]);
+	const [inventoryItems, setInventoryItems] = useState([]);
+
+	useEffect(() => {
+		const updateMenu = async () => {
+			const menu = await Database.getMenuItems();
+			for (let i = 0; i &lt; menu?.length; i++) {
+				let imageUrl = nameToUrl[menu[i].name];
+				if (imageUrl) menu[i].image = imageUrl;
+			}
+			setMenuItems(menu);
+		};
+		const updateInventory = async () => {
+			const inventory = await Database.getInventoryItems();
+			console.log(inventory);
+			setInventoryItems(inventory);
+		};
+		if (!menuItems?.length) {
+			updateMenu();
+		}
+		if (!inventoryItems?.length) {
+			updateInventory();
+		}
+	}, [menuItems, inventoryItems]);
+
+	const handleUpdate = (menuItemName, price, add) => {
+		let new_order;
+		for (let i = 0; i &lt; order.length; i++) {
+			if (order.at(i).name === menuItemName) {
+				new_order = [...order];
+				new_order.at(i).quantity += add ? 1 : -1;
+				if (new_order.at(i).quantity === 0)
+					new_order = new_order.filter((_, index) => index !== i);
+				setOrder(new_order);
+				return;
+			}
+		}
+		new_order = [
+			...order,
+			{ name: menuItemName, price: price, quantity: 1 },
+		];
+		setOrder(new_order);
+	};
+
+	const handleItemUpdate = () => {
+		const updateMenu = async () => {
+			const menu = await Database.getMenuItems();
+			for (let i = 0; i &lt; menu?.length; i++) {
+				let imageUrl = nameToUrl[menu[i].name];
+				if (imageUrl) menu[i].image = imageUrl;
+			}
+			setMenuItems(menu);
+		};
+		updateMenu();
+		return;
+	};
+
+	return (
+		&lt;>
+			&lt;Box position="fixed" width="15em">
+				&lt;Flex
+					flexDirection="column"
+					justify="center"
+					gap={1}
+					pt={2}
+					mb={2}
+				>
+					&lt;Button
+						size="md"
+						fontSize="1.5rem"
+						colorScheme="primary"
+						onClick={() => setLookingAtMenu(true)}
+						variant={lookingAtMenu ? "solid" : "outline"}
+						p={3}
+						px="2em"
+					>
+						Menu
+					&lt;/Button>
+					&lt;Button
+						size="md"
+						fontSize="1.5rem"
+						colorScheme="primary"
+						onClick={() => setLookingAtMenu(false)}
+						variant={!lookingAtMenu ? "solid" : "outline"}
+						p={3}
+						px="2em"
+					>
+						Inventory
+					&lt;/Button>
+				&lt;/Flex>
+				{lookingAtMenu ? (
+					&lt;Flex flexDirection="column" justify="center" gap="1em">
+						&lt;MenuCategorySelectionDisplay
+							selectedCategory={category}
+							onSelectCategory={setCategory}
+						/>
+						&lt;CreateMenuItemForm onSubmit={() => setMenuItems([])} />
+					&lt;/Flex>
+				) : (
+					""
+				)}
+				&lt;Box mt="1em">
+					&lt;OrderHistoryDisplay />
+				&lt;/Box>
+			&lt;/Box>
+			&lt;Flex justify="center">
+				&lt;ItemSelectionDisplay
+					isMenu={lookingAtMenu}
+					items={lookingAtMenu ? menuItems : inventoryItems}
+					category={category}
+					onUpdate={handleUpdate}
+					onItemUpdate={handleItemUpdate}
+				/>
+			&lt;/Flex>
+
+			&lt;Box position="fixed" right="12em" top="10em" width="15em">
+				&lt;StaffTable />
+				&lt;AddStaffForm />
+				&lt;Flex
+					flexDirection="column"
+					justify="center"
+					gap={1}
+					pt={2}
+					mb={2}
+				>
+					&lt;XReportDisplay />
+					&lt;ZReportDisplay />
+					&lt;SalesReportDisplay />
+					&lt;ExcessReportDisplay />
+					&lt;RestockReportDisplay />
+				&lt;/Flex>
+			&lt;/Box>
+		&lt;/>
+	);
+};
+
+export default ManagerPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddStaffForm">AddStaffForm</a></li><li><a href="global.html#ContentContainer">ContentContainer</a></li><li><a href="global.html#CreateMenuItemForm">CreateMenuItemForm</a></li><li><a href="global.html#CustomerPage">CustomerPage</a></li><li><a href="global.html#DEBUG">DEBUG</a></li><li><a href="global.html#DeleteMenuItemConfirm">DeleteMenuItemConfirm</a></li><li><a href="global.html#EditInventoryItemForm">EditInventoryItemForm</a></li><li><a href="global.html#EditMenuItemForm">EditMenuItemForm</a></li><li><a href="global.html#ExcessReportDisplay">ExcessReportDisplay</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#GoogleTranslate">GoogleTranslate</a></li><li><a href="global.html#InfoButton">InfoButton</a></li><li><a href="global.html#InventoryItemCard">InventoryItemCard</a></li><li><a href="global.html#ItemSelectionDisplay">ItemSelectionDisplay</a></li><li><a href="global.html#LoginPopup">LoginPopup</a></li><li><a href="global.html#MainView">MainView</a></li><li><a href="global.html#ManagerPage">ManagerPage</a></li><li><a href="global.html#MenuCategorySelectionDisplay">MenuCategorySelectionDisplay</a></li><li><a href="global.html#MenuItemCard">MenuItemCard</a></li><li><a href="global.html#MenuItemSelectionDisplay">MenuItemSelectionDisplay</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#OrderHistoryDisplay">OrderHistoryDisplay</a></li><li><a href="global.html#OrderTotalDisplay">OrderTotalDisplay</a></li><li><a href="global.html#RestockReportDisplay">RestockReportDisplay</a></li><li><a href="global.html#SalesReportDisplay">SalesReportDisplay</a></li><li><a href="global.html#ServerPage">ServerPage</a></li><li><a href="global.html#StaffTable">StaffTable</a></li><li><a href="global.html#WeatherDisplay">WeatherDisplay</a></li><li><a href="global.html#XReportDisplay">XReportDisplay</a></li><li><a href="global.html#ZReportDisplay">ZReportDisplay</a></li><li><a href="global.html#_getModel">_getModel</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#addStaffMember">addStaffMember</a></li><li><a href="global.html#backendOrigin">backendOrigin</a></li><li><a href="global.html#getExcessReport">getExcessReport</a></li><li><a href="global.html#getInventoryItems">getInventoryItems</a></li><li><a href="global.html#getMenuItemByName">getMenuItemByName</a></li><li><a href="global.html#getMenuItems">getMenuItems</a></li><li><a href="global.html#getMenuItemsForOrder">getMenuItemsForOrder</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getRecentOrders">getRecentOrders</a></li><li><a href="global.html#getRestockReport">getRestockReport</a></li><li><a href="global.html#getSalesReport">getSalesReport</a></li><li><a href="global.html#getStaff">getStaff</a></li><li><a href="global.html#getXReport">getXReport</a></li><li><a href="global.html#getZReport">getZReport</a></li><li><a href="global.html#makeOrder">makeOrder</a></li><li><a href="global.html#nameToUrl">nameToUrl</a></li><li><a href="global.html#postGoogleAuth">postGoogleAuth</a></li><li><a href="global.html#removeMenuItem">removeMenuItem</a></li><li><a href="global.html#updateInventoryQuantityByName">updateInventoryQuantityByName</a></li><li><a href="global.html#updateMenuPriceByName">updateMenuPriceByName</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 21:24:16 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

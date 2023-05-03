@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/manager/createStaffForm/index.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/manager/createStaffForm/index.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React, { useState, useEffect } from "react";
+import {
+	Box,
+	Text,
+	Flex,
+	Button,
+	Modal,
+	ModalOverlay,
+	ModalBody,
+	ModalHeader,
+	ModalContent,
+	ModalCloseButton,
+	ModalFooter,
+	useDisclosure,
+	Textarea,
+	Input,
+	useToast,
+} from "@chakra-ui/react";
+import Database from "../../../data";
+
+/**
+ * Returns component for creating staff
+ * @param onSubmit {function}
+ */
+const AddStaffForm = ({ onSubmit }) => {
+	const { isOpen, onOpen, onClose } = useDisclosure();
+
+	const toast = useToast();
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const restaurantId = Number(
+			document.getElementById("restaurant-id").value
+		);
+		const isManager = document.getElementById("is-manager").checked;
+		const staffName = document.getElementById("staff-name").value;
+		const staffEmail = document.getElementById("staff-email").value;
+
+		if (!restaurantId) {
+			toast({
+				title: "ERROR",
+				description: "No restaurant ID provided.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			return;
+		} else if (!staffName) {
+			toast({
+				title: "ERROR",
+				description: "No name for new staff member provided.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			return;
+		} else if (!staffEmail) {
+			toast({
+				title: "ERROR",
+				description: "No email for new staff member provided.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			return;
+		}
+
+		if (
+			!(await Database.addStaffMember(
+				restaurantId,
+				isManager,
+				staffName,
+				staffEmail
+			))
+		) {
+			toast({
+				title: "Staff Member Not Added",
+				description: "Issues with provided staff member information.",
+				status: "error",
+				duration: 5000,
+				isClosable: true,
+			});
+			return;
+		} else {
+			toast({
+				title: "Staff Member Added",
+				description: staffName + " added to the staff.",
+				status: "success",
+				duration: 5000,
+				isClosable: true,
+			});
+		}
+		onClose();
+		onSubmit();
+	};
+
+	return (
+		&lt;Flex flexDirection="column" justify="center" py="0.5em">
+			&lt;Button
+				onClick={() => onOpen()}
+				size="md"
+				fontSize="1.5rem"
+				colorScheme="primary"
+				variant="solid"
+				p={3}
+				px="2em"
+			>
+				Add Staff
+			&lt;/Button>
+			&lt;Modal isOpen={isOpen} onClose={onClose} size="lg">
+				&lt;ModalOverlay />
+				&lt;ModalContent>
+					&lt;ModalHeader>
+						&lt;Text textStyle="body2Semi">Add New Staff Member&lt;/Text>
+					&lt;/ModalHeader>
+					&lt;ModalCloseButton />
+					&lt;ModalBody>
+						&lt;Box
+							display="flex"
+							flexDirection="column"
+							justifyContent="center"
+							alignItems="center"
+							textAlign="center"
+						>
+							&lt;Box
+								style={{
+									width: "100%",
+								}}
+							>
+								&lt;Text textStyle="body3">Restaurant ID&lt;/Text>
+								&lt;Input
+									type="number"
+									name="restaurant-id"
+									id="restaurant-id"
+									placeholder="123"
+									style={{
+										background: "#f3f3f3",
+										borderRadius: "0.25rem",
+										border: "1px solid",
+										padding: "0.5rem",
+										width: "50%",
+										height: "2.25rem",
+										margin: "0 auto",
+									}}
+								/>
+							&lt;/Box>
+							&lt;Box mt={2} style={{ width: "100%" }}>
+								&lt;Text textStyle="body3">Is Manager?&lt;/Text>
+								&lt;input
+									type="checkbox"
+									name="is-manager"
+									id="is-manager"
+									style={{
+										margin: "0 auto",
+									}}
+								/>
+							&lt;/Box>
+							&lt;Box
+								mt={2}
+								style={{
+									width: "100%",
+								}}
+							>
+								&lt;Text textStyle="body3">Name&lt;/Text>
+								&lt;Input
+									type="text"
+									name="staff-name"
+									id="staff-name"
+									placeholder="John Doe"
+									style={{
+										background: "#f3f3f3",
+										borderRadius: "0.25rem",
+										border: "1px solid",
+										padding: "0.5rem",
+										width: "50%",
+										height: "2.25rem",
+										margin: "0 auto",
+									}}
+								/>
+							&lt;/Box>
+							&lt;Box
+								mt={2}
+								style={{
+									width: "100%",
+								}}
+							>
+								&lt;Text textStyle="body3">Email&lt;/Text>
+								&lt;Input
+									type="email"
+									name="staff-email"
+									id="staff-email"
+									placeholder="john.doe@example.com"
+									style={{
+										background: "#f3f3f3",
+										borderRadius: "0.25rem",
+										border: "1px solid",
+										padding: "0.5rem",
+										width: "50%",
+										height: "2.25rem",
+										margin: "0 auto",
+									}}
+								/>
+							&lt;/Box>
+						&lt;/Box>
+					&lt;/ModalBody>
+					&lt;ModalFooter justifyContent="center">
+						&lt;Button colorScheme="primary" onClick={handleSubmit}>
+							Confirm
+						&lt;/Button>
+					&lt;/ModalFooter>
+				&lt;/ModalContent>
+			&lt;/Modal>
+		&lt;/Flex>
+	);
+};
+
+export default AddStaffForm;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#AddStaffForm">AddStaffForm</a></li><li><a href="global.html#ContentContainer">ContentContainer</a></li><li><a href="global.html#CreateMenuItemForm">CreateMenuItemForm</a></li><li><a href="global.html#CustomerPage">CustomerPage</a></li><li><a href="global.html#DEBUG">DEBUG</a></li><li><a href="global.html#DeleteMenuItemConfirm">DeleteMenuItemConfirm</a></li><li><a href="global.html#EditInventoryItemForm">EditInventoryItemForm</a></li><li><a href="global.html#EditMenuItemForm">EditMenuItemForm</a></li><li><a href="global.html#ExcessReportDisplay">ExcessReportDisplay</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#GoogleTranslate">GoogleTranslate</a></li><li><a href="global.html#InfoButton">InfoButton</a></li><li><a href="global.html#InventoryItemCard">InventoryItemCard</a></li><li><a href="global.html#ItemSelectionDisplay">ItemSelectionDisplay</a></li><li><a href="global.html#LoginPopup">LoginPopup</a></li><li><a href="global.html#MainView">MainView</a></li><li><a href="global.html#ManagerPage">ManagerPage</a></li><li><a href="global.html#MenuCategorySelectionDisplay">MenuCategorySelectionDisplay</a></li><li><a href="global.html#MenuItemCard">MenuItemCard</a></li><li><a href="global.html#MenuItemSelectionDisplay">MenuItemSelectionDisplay</a></li><li><a href="global.html#MenuPage">MenuPage</a></li><li><a href="global.html#Navbar">Navbar</a></li><li><a href="global.html#OrderHistoryDisplay">OrderHistoryDisplay</a></li><li><a href="global.html#OrderTotalDisplay">OrderTotalDisplay</a></li><li><a href="global.html#RestockReportDisplay">RestockReportDisplay</a></li><li><a href="global.html#SalesReportDisplay">SalesReportDisplay</a></li><li><a href="global.html#ServerPage">ServerPage</a></li><li><a href="global.html#StaffTable">StaffTable</a></li><li><a href="global.html#WeatherDisplay">WeatherDisplay</a></li><li><a href="global.html#XReportDisplay">XReportDisplay</a></li><li><a href="global.html#ZReportDisplay">ZReportDisplay</a></li><li><a href="global.html#_getModel">_getModel</a></li><li><a href="global.html#addMenuItem">addMenuItem</a></li><li><a href="global.html#addStaffMember">addStaffMember</a></li><li><a href="global.html#backendOrigin">backendOrigin</a></li><li><a href="global.html#getExcessReport">getExcessReport</a></li><li><a href="global.html#getInventoryItems">getInventoryItems</a></li><li><a href="global.html#getMenuItemByName">getMenuItemByName</a></li><li><a href="global.html#getMenuItems">getMenuItems</a></li><li><a href="global.html#getMenuItemsForOrder">getMenuItemsForOrder</a></li><li><a href="global.html#getOrders">getOrders</a></li><li><a href="global.html#getRecentOrders">getRecentOrders</a></li><li><a href="global.html#getRestockReport">getRestockReport</a></li><li><a href="global.html#getSalesReport">getSalesReport</a></li><li><a href="global.html#getStaff">getStaff</a></li><li><a href="global.html#getXReport">getXReport</a></li><li><a href="global.html#getZReport">getZReport</a></li><li><a href="global.html#makeOrder">makeOrder</a></li><li><a href="global.html#nameToUrl">nameToUrl</a></li><li><a href="global.html#postGoogleAuth">postGoogleAuth</a></li><li><a href="global.html#removeMenuItem">removeMenuItem</a></li><li><a href="global.html#updateInventoryQuantityByName">updateInventoryQuantityByName</a></li><li><a href="global.html#updateMenuPriceByName">updateMenuPriceByName</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 02 2023 21:24:16 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

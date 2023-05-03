@@ -1,0 +1,49 @@
+Meeting Minutes:
+
+Date: 4/18/2023
+Time: 10:00 AM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Discuss testing of linked frontend and backend functionalities
+Inclusion of User Authentication
+Check up on status of log in page
+
+Status Update Since Last Meeting:
+
+Linked the backend queries from project 2 phase 4 to the frontend
+Implemented manager components and menu display components
+Designed the log in page
+Began working on User Authentication
+
+Tasks Completed:
+
+Linked queries to the frontend: Assigned to Andrew/Jeffrey; Completed
+  + Pre-Phase 4
+    - getMenuItems
+    - getInventoryItem
+    - createMenuItem
+    - createOrder
+    - getOrders
+    - etc.
+  + Post-Phase 4
+    - getSalesReport
+    - getXReport/getZReport
+    - getRestockReport
+    - addInventoryItem
+Implemented manager and menu display GUI : Assigned to Art; Completed
+Designed Log-in screen for User Authentication (Landing page) : Assigned to Art; Completed
+
+Task Assignments:
+
+Add User authentication with Google's Oauth: Assigned to Andrew/Jeffrey; In progress
+Implement log in landing page for user authentication: Assigned Art/David; In progress
+
+End of Meeting

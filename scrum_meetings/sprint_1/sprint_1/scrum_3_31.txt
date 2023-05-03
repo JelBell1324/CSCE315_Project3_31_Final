@@ -1,0 +1,33 @@
+Meeting Minutes:
+
+Date: March 31, 2023
+Time: 3:00 PM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+Meeting Agenda Items:
+
+Frontend GUI Design
+Backend Queries and connections
+Status Update Since Last Meeting:
+
+Satisfactory designs for respective views are created
+A successful connection with the postgreSQL database is made
+Tasks Completed:
+
+Design UI for Customer/Server/Manager: Assigned to Art/Andrew; Completed? Yes
+Establish working connection to database: Assigned to David/Jeffrey; Completed? Yes
+Before The Next Meeting:
+Plans:
+
+Begin the coding of the UI design
+Analyze previous database code
+Task Assignments:
+
+Transfer UI design into code: Assigned to Art/Andrew
+Begin recreation/reassessment of database queries: Assigned to David/Jeffrey
+End of Meeting

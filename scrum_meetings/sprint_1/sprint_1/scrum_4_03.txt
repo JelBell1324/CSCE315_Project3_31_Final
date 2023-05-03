@@ -1,0 +1,33 @@
+Meeting Minutes:
+
+Date: 4/03/2023
+Time: 9:00 AM
+
+Meeting Attendees:
+
+David Chi
+Art Young
+Andrew Mao
+Jeffrey Li
+
+Meeting Agenda Items:
+
+Coding out front end GUI
+Developing and engineering out backend queries and functionalities pre-phase 4
+Status Update Since Last Meeting:
+
+Database evaluation completed with ideas of how to improve previous project's slow processes
+Tasks Completed:
+
+Transfer UI design into code: Assigned to Art/Andrew; Completed? No
+Begin recreation/reassessment of database queries: Assigned to David/Jeffrey; Completed? Yes
+Before The Next Meeting:
+Plans:
+
+Continue development of UI
+Create connection between front and back end
+Task Assignments:
+
+Continue working on transferring UI into react: Assigned to Art/Andrew
+Connect working backend to the react frontend interface: Assigned to David/Jeffrey
+End of Meeting
